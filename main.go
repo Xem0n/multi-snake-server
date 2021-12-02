@@ -14,6 +14,11 @@ func main() {
 	addr := *address + ":" + *port
 	log.Println("server running on: " + addr)
 
+	game := newGame()
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		serveWebsocket(game, w, r)
+	})
+
 	err := http.ListenAndServe(addr, nil)
 
 	if err != nil {
