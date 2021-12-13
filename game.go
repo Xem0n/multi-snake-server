@@ -11,5 +11,5 @@ func newGame() *Game {
 }
 
 func (game *Game) add(client *Client) {
-	// append(game.clients, client)
+	game.clients = append(game.clients, client)
 }
