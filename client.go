@@ -33,7 +33,6 @@ func serveWebsocket(game *Game, w http.ResponseWriter, r *http.Request) {
 		conn: conn,
 	}
 
-	game.add(client)
-
 	log.Printf("new connection: %s\n", conn.LocalAddr().String())
+	game.add(client)
 }
