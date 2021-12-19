@@ -26,6 +26,7 @@ var upgrader = websocket.Upgrader{
 type Client struct {
 	conn *websocket.Conn
 	game *Game
+	snake *Snake
 	closed bool
 }
 
@@ -97,6 +98,7 @@ func serveWebsocket(game *Game, w http.ResponseWriter, r *http.Request) {
 	client := &Client{
 		game: game,
 		conn: conn,
+		snake: &Snake{},
 		closed: false,
 	}
 
