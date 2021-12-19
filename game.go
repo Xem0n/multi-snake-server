@@ -1,6 +1,12 @@
 package main
 
-import "log"
+import (
+	"log"
+	"math"
+	"time"
+)
+
+const MAX_DELTA = 50
 
 type Game struct {
 	clients map[*Client]bool
@@ -14,7 +20,33 @@ func newGame() *Game {
 
 func (game *Game) start() {
 	log.Println("game started")
-	// todo: add game loop
+
+	game.loop()
+}
+
+func (game *Game) loop() {
+	lastTimestamp := time.Now()
+
+	for {
+		if len(game.clients) < 2 {
+			game.onStopped()
+
+			break
+		}
+
+		curTimestamp := time.Now()
+		delta := math.Min(float64(curTimestamp.Sub(lastTimestamp)), MAX_DELTA)
+		lastTimestamp = curTimestamp
+
+		game.think(delta);
+	}
+}
+
+func (game *Game) think(delta float64) {
+}
+
+func (game *Game) onStopped() {
+	log.Println("game stopped (someone left the game)")
 }
 
 func (game *Game) canStart() bool {
