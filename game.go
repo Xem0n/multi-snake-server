@@ -43,6 +43,9 @@ func (game *Game) loop() {
 }
 
 func (game *Game) think(delta float64) {
+	for client := range game.clients {
+		client.snake.think(delta)
+	}
 }
 
 func (game *Game) onStopped() {
