@@ -12,10 +12,8 @@ func newGame() *Game {
 	}
 }
 
-func (game *Game) canStart() {
-	if len(game.clients) == 2 {
-		go game.start()
-	}
+func (game *Game) canStart() bool {
+	return len(game.clients) == 2
 }
 
 func (game *Game) start() {
@@ -34,5 +32,7 @@ func (game *Game) canAddNewClient() bool {
 func (game *Game) add(client *Client) {
 	game.clients[client] = true
 
-	game.canStart()
+	if game.canStart() {
+		go game.start()
+	}
 }
