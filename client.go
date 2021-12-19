@@ -86,6 +86,8 @@ func (client *Client) close() {
 
 func serveWebsocket(game *Game, w http.ResponseWriter, r *http.Request) {
 	if (!game.canAddNewClient()) {
+		log.Println("game's already started. rejected connection")
+
 		return
 	}
 
