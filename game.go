@@ -12,13 +12,13 @@ func newGame() *Game {
 	}
 }
 
-func (game *Game) canStart() bool {
-	return len(game.clients) == 2
-}
-
 func (game *Game) start() {
 	log.Println("game started")
 	// todo: add game loop
+}
+
+func (game *Game) canStart() bool {
+	return len(game.clients) == 2
 }
 
 func (game *Game) delete(client *Client) {
