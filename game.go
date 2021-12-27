@@ -25,12 +25,14 @@ func (game *Game) start() {
 }
 
 func (game *Game) loop() {
+	defer func() {
+		game.onStopped()
+	}()
+
 	lastTimestamp := time.Now()
 
 	for {
 		if len(game.clients) < 2 {
-			game.onStopped()
-
 			break
 		}
 
@@ -44,7 +46,9 @@ func (game *Game) loop() {
 
 func (game *Game) think(delta float64) {
 	for client := range game.clients {
-		client.snake.think(delta)
+		if client != nil {
+			client.snake.think(delta)
+		}
 	}
 }
 
