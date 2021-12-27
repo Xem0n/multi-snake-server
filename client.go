@@ -100,7 +100,7 @@ func serveWebsocket(game *Game, w http.ResponseWriter, r *http.Request) {
 	client := &Client{
 		game: game,
 		conn: conn,
-		snake: &Snake{},
+		snake: newSnake(),
 		closed: false,
 	}
 
