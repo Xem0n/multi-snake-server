@@ -33,7 +33,7 @@ func (game *Game) loop() {
 
 	for {
 		select {
-		// not sure if that tickrate is proper 
+		// not sure if that tickrate is proper
 		case <-time.After(16 * time.Millisecond):
 			if len(game.clients) < 2 {
 				break
@@ -43,7 +43,7 @@ func (game *Game) loop() {
 			delta := math.Min(float64(curTimestamp.Sub(lastTimestamp)), MAX_DELTA)
 			lastTimestamp = curTimestamp
 
-			game.think(delta);
+			game.think(delta)
 		}
 	}
 }
