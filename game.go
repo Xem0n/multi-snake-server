@@ -32,15 +32,19 @@ func (game *Game) loop() {
 	lastTimestamp := time.Now()
 
 	for {
-		if len(game.clients) < 2 {
-			break
+		select {
+		// not sure if that tickrate is proper 
+		case <-time.After(16 * time.Millisecond):
+			if len(game.clients) < 2 {
+				break
+			}
+
+			curTimestamp := time.Now()
+			delta := math.Min(float64(curTimestamp.Sub(lastTimestamp)), MAX_DELTA)
+			lastTimestamp = curTimestamp
+
+			game.think(delta);
 		}
-
-		curTimestamp := time.Now()
-		delta := math.Min(float64(curTimestamp.Sub(lastTimestamp)), MAX_DELTA)
-		lastTimestamp = curTimestamp
-
-		game.think(delta);
 	}
 }
 
