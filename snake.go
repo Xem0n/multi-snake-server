@@ -30,7 +30,28 @@ func newSnake() *Snake {
 }
 
 func (snake *Snake) think(delta float64) {
-	// for _, part := range snake.parts {
-	// magic wth part
-	// }
+	snake.move()
+}
+
+func (snake *Snake) move() {
+	for i := len(snake.parts) - 1; i >= 1; i-- {
+		snake.parts[i] = snake.parts[i - 1]
+	}
+
+	snake.parts[0].pos = snake.getNewPos()
+}
+
+func (snake *Snake) getNewPos() *Point {
+	x := float64(int32(snake.direction)&1) * VELOCITY
+	x *= 2 - float64(snake.direction)
+
+	y := float64(int32(snake.direction+1)&1) * VELOCITY
+	y *= 2 - float64(snake.direction+1)
+
+	pos := snake.parts[0].pos
+
+	return &Point{
+		pos.x + x,
+		pos.y + y,
+	}
 }
