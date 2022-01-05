@@ -4,7 +4,8 @@ const STARTING_LENGTH = 50
 const VELOCITY = 1
 
 type Snake struct {
-	parts []*Part
+	parts     []*Part
+	direction Direction
 }
 
 func newSnake() *Snake {
@@ -24,6 +25,7 @@ func newSnake() *Snake {
 
 	return &Snake{
 		parts,
+		Up,
 	}
 }
 
