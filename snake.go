@@ -35,7 +35,7 @@ func (snake *Snake) think(delta float64) {
 
 func (snake *Snake) move() {
 	for i := len(snake.parts) - 1; i >= 1; i-- {
-		snake.parts[i] = snake.parts[i - 1]
+		*snake.parts[i] = *snake.parts[i - 1]
 	}
 
 	snake.parts[0].pos = snake.getNewPos()
