@@ -3,8 +3,8 @@ package main
 type Direction float64
 
 const (
-	Up Direction = iota
+	Down Direction = iota
 	Right
-	Down
+	Up
 	Left
 )
