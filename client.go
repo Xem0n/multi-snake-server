@@ -52,7 +52,10 @@ func (client *Client) readPump() {
 	}
 }
 
-func (client *Client) handleMessage(json interface{}) {
+func (client *Client) handleMessage(json map[string]interface{}) {
+	// todo: parse and eventually execute messages
+
+	log.Printf("%#v\n", json)
 }
 
 func (client *Client) writePump() {
