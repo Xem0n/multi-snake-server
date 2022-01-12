@@ -39,14 +39,20 @@ func (client *Client) readPump() {
 	client.conn.SetPongHandler(func(string) error { client.conn.SetReadDeadline(time.Now().Add(readWait)); return nil })
 
 	for {
-		_, _, err := client.conn.ReadMessage() 
+		var json interface{}
+		err := client.conn.ReadJSON(&json)
 
 		if err != nil {
+			log.Println(err)
+
 			break
 		}
 
-		// todo: handle message
+		client.handleMessage(json)
 	}
+}
+
+func (client *Client) handleMessage(json interface{}) {
 }
 
 func (client *Client) writePump() {
