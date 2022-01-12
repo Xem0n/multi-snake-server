@@ -39,7 +39,7 @@ func (client *Client) readPump() {
 	client.conn.SetPongHandler(func(string) error { client.conn.SetReadDeadline(time.Now().Add(readWait)); return nil })
 
 	for {
-		var json interface{}
+		var json map[string]interface{}
 		err := client.conn.ReadJSON(&json)
 
 		if err != nil {
