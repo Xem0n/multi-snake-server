@@ -56,7 +56,7 @@ func (client *Client) handleMessage(json map[string]interface{}) {
 	message, err := decodeMessage(json)
 
 	if err != nil {
-		log.Printf("%v", err)
+		log.Println(err)
 
 		return
 	}
