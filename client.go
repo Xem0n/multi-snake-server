@@ -53,9 +53,15 @@ func (client *Client) readPump() {
 }
 
 func (client *Client) handleMessage(json map[string]interface{}) {
-	// todo: parse and eventually execute messages
+	message, err := decodeMessage(json)
 
-	log.Printf("%#v\n", json)
+	if err != nil {
+		log.Printf("%v", err)
+
+		return
+	}
+
+	message.handle(client)
 }
 
 func (client *Client) writePump() {
