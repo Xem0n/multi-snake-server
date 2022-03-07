@@ -1,6 +1,6 @@
 package main
 
-type Direction float64
+type Direction int32
 
 const (
 	Down Direction = iota
