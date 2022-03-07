@@ -16,7 +16,19 @@ type DirectionMessage struct {
 }
 
 func (message *DirectionMessage) handle(client *Client) {
-	// handle message
+	if message.Direction == client.snake.direction {
+		return
+	}
+
+	if int32(message.Direction)&1 == int32(client.snake.direction)&1 {
+		return
+	}
+
+	if message.Direction > 3 {
+		return
+	}
+
+	client.snake.direction = message.Direction
 }
 
 var messages = map[string]func() MessageHandler {
